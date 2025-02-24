@@ -63,7 +63,6 @@ class CommentResource extends Resource
                     ->sortable(),
             ])
             ->filters([ 
-                // Buraya filtre eklemek isterseniz
             ])
             ->actions([
                 Tables\Actions\EditAction::make(), 

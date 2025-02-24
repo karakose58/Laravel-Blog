@@ -1,9 +1,7 @@
 version: '3.8'
 
 services:
-    # PHP Service container
     laravel_eleven_app:
-    #    platform: linux/amd64
         build:
             args:
                 user: laravel_eleven_user
@@ -21,9 +19,7 @@ services:
             -   ./:/var/www
         networks:
            - laravel_network
-    #nginx service
     laravel_eleven_webserver:
-    #    platform: linux/amd64
         image: nginx:alpine
         container_name: laravel_eleven_webserver_container
         restart: unless-stopped
@@ -42,7 +38,6 @@ services:
                     - apisite
 
 
-    #mysql service
     laravel_eleven_app_mysql:
         image: mysql:5.7.22
         container_name: laravel_eleven_app_mysql_container

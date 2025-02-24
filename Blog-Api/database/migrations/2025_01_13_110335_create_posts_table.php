@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(false); 
             $table->timestamp('start')->nullable();
             $table->timestamp('stop')->nullable();
-            $table->json('tags')->nullable(); // 'tags' alanını JSON tipi yapıyoruz
+            $table->json('tags')->nullable(); 
             $table->string('image')->nullable();
 
             $table->timestamps();

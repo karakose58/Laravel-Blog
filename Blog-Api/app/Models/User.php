@@ -22,7 +22,6 @@ class User extends Authenticatable implements FilamentUser
     ];
 
     /**
-     * Kullanıcı ile rol ilişkisini tanımlar.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
 

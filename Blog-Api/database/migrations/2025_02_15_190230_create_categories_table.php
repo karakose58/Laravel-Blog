@@ -19,8 +19,7 @@ return new class extends Migration
         });
 
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('category_name')->after('id'); // category_name sütununu ekliyoruz
-            // Foreign key kısıtlamasını ekliyoruz
+            $table->string('category_name')->after('id'); 
             $table->foreign('category_name')->references('name')->on('categories')->onDelete('cascade'); // `set null` yerine `cascade` veya `restrict` kullanılabilir
         });
     }

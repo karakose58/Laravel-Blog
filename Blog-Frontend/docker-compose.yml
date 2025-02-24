@@ -1,9 +1,7 @@
 version: '3.8'
 
 services:
-    # PHP Service container
     laravel_frontend_app:
-    #    platform: linux/amd64
         build:
             args:
                 user: laravel_frontend_user
@@ -20,9 +18,7 @@ services:
             -   ./:/var/www
         networks:
             - laravel_network
-    #nginx service
     laravel_frontend_webserver:
-    #    platform: linux/amd64
         image: nginx:alpine
         container_name: laravel_frontend_webserver_container
         restart: unless-stopped

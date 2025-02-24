@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('author');
             $table->text('content');
             $table->boolean('is_active')->default(false);
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // user_id foreign key
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); 
             $table->timestamps();
         });
     }
