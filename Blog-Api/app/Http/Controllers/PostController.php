@@ -134,20 +134,20 @@ class PostController extends Controller
     
     
     
-public function getProduct($id)
+public function getProduct($id)//id ile post çağırma
 {
     $post = Post::with(['comments' => function ($query) {
-          $query->where('is_active', 1);//id ile post çağırma
+          $query->where('is_active', 1);
     }])->findOrFail($id);
 
     return response()->json($post);
 }
 
 
-public function getTags($tag)
+public function getTags($tag)//tag ile post çağırma
 {
     $posts = Post::with(['comments' => function ($query) {
-        $query->where('is_active', 1);//tag ile post çağırma
+        $query->where('is_active', 1);
     }])
     ->whereJsonContains('tags', $tag)
     ->get()

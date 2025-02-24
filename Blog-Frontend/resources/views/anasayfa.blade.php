@@ -12,7 +12,6 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-wrap items-center justify-between h-auto py-2">
 
-      <!-- Arama Çubuğu -->
       <div class="w-full sm:w-auto flex-grow mb-2 sm:mb-0">
         <form method="GET" action="{{ route('homeTag') }}">
           <input type="text" placeholder="Ürün Ara..." name="search"
@@ -20,7 +19,6 @@
         </form>
       </div>
 
-      <!-- Profil ve Menü -->
       <div class="flex items-center justify-center gap-2 w-full sm:w-auto">
         <a href="{{ route('user-info') }}"
           class="px-4 py-2 bg-gray-700 rounded-md text-sm hover:bg-gray-600 transition">
@@ -43,7 +41,6 @@
 
 
 
-<!-- Kategori Slider -->
 <section class="bg-gray-900 text-white py-4">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-xl font-semibold mb-3">Kategoriler</h2>
@@ -60,7 +57,6 @@
   </div>
 </section>
 
-<!-- Sıralama Butonları -->
 <div class="flex flex-wrap justify-center gap-3 my-5 px-4">
   @foreach(['home-sort' => 'Alfabetik', 'home-new' => 'Yeni', 'home-old' => 'Eski', 'home-popular' => 'Popüler'] as $route => $label)
     <a href="{{ route($route) }}"
@@ -70,7 +66,6 @@
   @endforeach
 </div>
 
-<!-- Ürünler -->
 <section class="max-w-7xl mx-auto px-4">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
     @foreach($posts as $post)

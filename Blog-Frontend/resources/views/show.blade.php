@@ -21,7 +21,6 @@
     </div>
 </header>
 
-<!-- Ürün Detay -->
 <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mt-6">
     <h2 class="text-2xl font-semibold">{{ $post['title'] }}</h2>
     <p class="text-gray-600 mt-2">{{ $post['text'] }}</p>
@@ -38,7 +37,6 @@
     </div>
 </div>
 
-<!-- Yorumlar -->
 <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mt-6">
     <h3 class="text-xl font-semibold mb-4">Yorumlar</h3>
 
@@ -53,7 +51,6 @@
     @endif
 </div>
 
-<!-- Yorum Ekleme Formu -->
 <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mt-6">
     <h3 class="text-xl font-semibold mb-4">Yorum Yap</h3>
     <form method="POST" action="{{ route('comment.add', $post['id']) }}">

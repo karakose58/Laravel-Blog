@@ -1,4 +1,4 @@
-<!-- resources/views/kvkk.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,6 @@
     <main class="container mx-auto p-6">
         <h2 class="text-3xl font-bold mb-6">Kişisel Verilerin Korunması Kanunu (KVKK)</h2>
 
-        <!-- KVKK İçeriği Burada Görüntülenecek -->
         <div id="kvkkContent" class="bg-white p-6 rounded-lg shadow-md">
         <div class="text-lg">{{ $kvkk[0]['kvkk'] }}</div>
         </div>

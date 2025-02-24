@@ -20,7 +20,7 @@ return new class extends Migration
 
         Schema::table('posts', function (Blueprint $table) {
             $table->string('category_name')->after('id'); 
-            $table->foreign('category_name')->references('name')->on('categories')->onDelete('cascade'); // `set null` yerine `cascade` veya `restrict` kullanılabilir
+            $table->foreign('category_name')->references('name')->on('categories')->onDelete('cascade'); 
         });
     }
     
