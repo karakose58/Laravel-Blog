@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CommentResource\Pages;
-use App\Models\comment;
+use App\Models\Comment;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -36,7 +36,7 @@ class CommentResource extends Resource
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_active')
+                Forms\Components\Toggle::make('status')
                     ->required()
                     ->visible(fn () => Auth::user()->hasRole('admin')),
                 Forms\Components\Hidden::make('post_id')
@@ -53,7 +53,7 @@ class CommentResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('content')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
+                Tables\Columns\IconColumn::make('status')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

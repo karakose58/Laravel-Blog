@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('text');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->boolean('is_active')->default(false); 
+            $table->boolean('status')->default(false); 
             $table->timestamp('start')->nullable();
             $table->timestamp('stop')->nullable();
             $table->json('tags')->nullable(); 

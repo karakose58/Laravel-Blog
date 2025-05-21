@@ -13,7 +13,11 @@ class Category extends Model
 
     public function posts() 
     {
-        return $this->hasMany(Post::class, 'category_name', 'name')->where('posts.is_active', 1); 
+        return $this->hasMany(Post::class, 'category_name', 'name')->where('posts.status', 1); 
     }
-}
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }}
 

@@ -88,7 +88,7 @@ class PostResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.name') 
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
+                Tables\Columns\IconColumn::make('status')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('start')
                     ->dateTime()

@@ -16,12 +16,12 @@ class start_stop extends Command
         $now = Carbon::now();
 
         $activatedCount = Post::where('start', '<=', $now)
-            ->where('is_active', 0)
-            ->update(['is_active' => 1]);
+            ->where('status', 0)
+            ->update(['status' => 1]);
 
         $deactivatedCount = Post::where('stop', '<=', $now)
-            ->where('is_active', 1)
-            ->update(['is_active' => 0]);
+            ->where('status', 1)
+            ->update(['status' => 0]);
 
         $this->info("Aktif hale getirilen yazı sayısı: $activatedCount");
         $this->info("Pasif hale getirilen yazı sayısı: $deactivatedCount");

@@ -9,14 +9,19 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\AuthMail;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Traits\ApiResponse;
 
 class AuthController extends Controller
 {
+    use ApiResponse;
 
     public function userinfo()
     {
         $user = auth()->user();
-        return response()->json($user);
+        return $this->success($user, 'Kullanıcı bilgileri getirildi.');
     }
 
     public function logout(Request $request)
@@ -24,104 +29,87 @@ class AuthController extends Controller
 
         $request->user()->currentAccessToken()->delete();
     
-        return response()->json([
-            'message' => 'Başarıyla çıkış yaptınız.'
-            
-        ]);
+        return $this->success(null, 'Başarıyla çıkış yaptınız.');
+
     }
     
     
-        public function login(Request $request)
-        {
-            $request->validate([
-                'email' => 'required|string|email',
-                'password' => 'required|string',
-            ]);
+    public function login(LoginRequest $request)
+    {
+        $validated = $request->validated();
+    
+        $user = User::where('email', $validated['email'])->first();
         
-            $user = User::where('email', $request->email)->first();
-            
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response()->json([
-                    'message' => 'Giriş bilgileri hatalı. E-posta adresinizi yada şifrenizi kontrol edin.'
-                ], 401);
-            }
-        
-            $token = $user->createToken('auth_token')->plainTextToken;
-
-
-
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
             return response()->json([
-                'message' => 'Giriş başarılı!',
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-            ]);
+                
+                'message' => 'Giriş bilgileri hatalı. E-posta adresinizi yada şifrenizi kontrol edin.'
+            ], 401);
         }
+    
+        $token = $user->createToken('auth_token')->plainTextToken;
+    
+        return response()->json([
+            'message' => 'Giriş başarılı!',
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    }
     
 
 
-        public function register(Request $request)
-        {
-            $messages = [
-                'name.required'     => 'İsim alanı zorunludur.',
-                'email.required'    => 'E-posta adresi zorunludur.',
-                'email.email'       => 'Geçerli bir e-posta adresi giriniz.',
-                'email.unique'      => 'Bu e-posta adresi zaten kayıtlı.',
-                'password.required' => 'Şifre alanı zorunludur.',
-                'password.min'      => 'Şifre en az 6 karakter olmalıdır.',
-            ];
+public function register(RegisterRequest $request)
+    {
         
-            $validator = Validator::make($request->all(), [
-                'name'     => 'required|string|max:255',
-                'email'    => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6',
-            ], $messages); 
-        
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => 'error',
-                    'errors' => $validator->errors()
-                ], 422);
-            }
-        
-            try {
-                $user = User::create([
-                    'name'     => $request->name,
-                    'email'    => $request->email,
-                    'password' => Hash::make($request->password),
-                ]);
-        
-                $user->assignRole('user');
+        $validated = $request->validated();
+    
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            
+        ]);
 
-                return response()->json([
-                    'status'  => 'success',
-                    'message' => 'Kayıt başarılı!'
-                ], 201);
-        
-            } catch (\Exception $e) {
-                return response()->json([
-                    'status'  => 'error',
-                    'message' => 'Kayıt sırasında bir hata oluştu: ' . $e->getMessage()
-                ], 500);
-            }
+  
+            
+            
+        if ($user) {
+            return response()->json([
+                'message' => 'Kayıt başarılı.',
+            ], 201);
         }
+    
+        return response()->json([
+            'message' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
+        ], 500);
+    }
+
+
+
+
+
+
+
+
         
         
 
 
-        public function update_user(Request $request)
+        public function update_user(UpdateUserRequest $request)
         {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|max:255',
-            ]);
+            $validated = $request->validated();
         
             $user = auth()->user();
-   
+        
             $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
+                'name' => $validated['name'],
+                'email' => $validated['email'],
             ]);
         
-            return response()->json(['message' => 'Yazı başarıyla güncellendi', 'user' => $user]);
+            return response()->json([
+                'message' => 'Kullanıcı başarıyla güncellendi.',
+                'user' => $user
+            ]);
         }
+        
 }

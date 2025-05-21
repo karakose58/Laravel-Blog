@@ -8,18 +8,17 @@
 </head>
 <body>
 
-    @if ($errors->any())
+@if ($errors->any())
     <div class="bg-red-600 text-white px-4 py-2 rounded mb-4 w-full">
-    <ul class="list-disc list-inside">
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-    @endif
 
-    
     <div class="bg-cover bg-center min-h-screen flex justify-center items-center">
 
     <div class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md">
@@ -27,23 +26,23 @@
         <form action="{{ route('register') }}" method="post" class="space-y-4">
             @csrf
             <div class="text-center">
-                <input type="text" name="name" placeholder="Adınız Soyadınız"
-                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" required />
+                <input type="text" name="name" value="{{ old('name') }}" placeholder="Adınız Soyadınız"
+                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" />
             </div>
 
             <div class="text-center">
-                <input type="email" name="email" placeholder="E-posta adresiniz"
-                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" required />
+                <input type="email" name="email" value="{{ old('email') }}" placeholder="E-posta adresiniz"
+                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" />
             </div>
 
             <div class="text-center">
                 <input type="password" name="password" placeholder="Şifreniz"
-                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" required />
+                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" />
             </div>
 
             <div class="text-center">
                 <input type="password" name="password_confirmation" placeholder="Şifrenizi Tekrar Giriniz"
-                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" required />
+                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400" />
             </div>
 
             <div class="w-full text-right">

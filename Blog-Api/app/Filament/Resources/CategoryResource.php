@@ -26,7 +26,7 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\Toggle::make('is_active')
+                    Forms\Components\Toggle::make('status')
                     ->required(),
             ]);
             

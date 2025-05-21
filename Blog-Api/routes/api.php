@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ExampleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\MailController;
+use App\Http\Controllers\KvkkController;
+use App\Http\Controllers\CategoryController;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -14,7 +15,6 @@ use Spatie\Permission\Models\Permission;
 
 Route::post('/login', [AuthController::class, 'login']); 
 Route::post('/register', [AuthController::class, 'register']); 
-
 
 
 
@@ -28,29 +28,22 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/products/tag/{tag}', [PostController::class, 'getTags']);
     Route::get('/products', [PostController::class, 'listProducts']);
     Route::get('/products/{id}', [PostController::class, 'getProduct']);
-    Route::get('/categories/{id}', [PostController::class, 'Category']);
-    Route::get('/categories', [PostController::class, 'ListCategory']);
+    Route::get('/categories/{id}', [CategoryController::class, 'Category']);
+    Route::get('/categories', [CategoryController::class, 'ListCategory']);
 
     Route::get('/products-sort', [PostController::class, 'alphabetic']);
     Route::get('/products-new', [PostController::class, 'new']);
     Route::get('/products-old', [PostController::class, 'old']);
-    Route::get('/products-popular', [PostController::class, 'popular']);
+    Route::get('/products-popular', [PostController::class, 'popular']);    
 
 
 });
 
-Route::get('/kvkk', [PostController::class, 'kvkk']);
+Route::get('/kvkk', [KvkkController::class, 'kvkk']);
 
 
 
 
-
-
-
-
-Route::middleware(['auth:sanctum', 'role:writer'])->group(function () {
-
-});
 
 
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->string('author');
             $table->text('content');
-            $table->boolean('is_active')->default(false);
+            $table->boolean('status')->default(false);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); 
             $table->timestamps();
         });

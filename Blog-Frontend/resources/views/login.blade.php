@@ -8,17 +8,17 @@
 </head>
 <body  >
 
-@if (!empty($message))
-        <div class="bg-red-600 text-white px-4 py-2 rounded mb-4">
-            {{ $message }}
-        </div>
-    @endif
 
-    @if (session('message'))
-        <div class="bg-red-600 text-white px-4 py-2 rounded mb-4">
-            {{ session('message') }}
-        </div>
-    @endif
+
+@if ($errors->any())
+    <div class="bg-red-600 text-white px-4 py-2 rounded mb-4 w-full">
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="bg-cover bg-center min-h-screen flex justify-center items-center">
 
@@ -27,13 +27,13 @@
         <form action="{{ route('login') }}" method="post" class="space-y-4">
             @csrf
             <div class="text-center">
-                <input type="email" name="email" placeholder="E-posta adresiniz"
-                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+                <input type="text" name="email" placeholder="E-posta adresiniz"
+                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"  />
             </div>
 
             <div class="text-center">
                 <input type="password" name="password" placeholder="Şifreniz"
-                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+                    class="w-full px-4 py-2 rounded-full border-2 border-black bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"  />
             </div>
 
             <div class="w-full text-right">
